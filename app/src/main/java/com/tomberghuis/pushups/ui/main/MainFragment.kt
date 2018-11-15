@@ -11,6 +11,10 @@ import android.widget.Toast
 import com.tomberghuis.pushups.MainActivity
 import android.widget.NumberPicker
 import kotlinx.android.synthetic.main.main_fragment.*
+import com.tomberghuis.pushups.R.id.container
+import android.databinding.DataBindingUtil
+import android.util.Log
+import com.tomberghuis.pushups.databinding.MainFragmentBinding
 
 
 class MainFragment : Fragment() {
@@ -19,50 +23,35 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        var root = inflater.inflate(R.layout.main_fragment, container, false)
-
-//        numberPicker.minValue = 2
-//        numberPicker.maxValue = 20
-
-        return root
+        val binding : MainFragmentBinding = DataBindingUtil.inflate(
+            inflater, R.layout.main_fragment, container, false
+        )
+        binding.viewmodel = viewModel
+        val view = binding.getRoot()
+        return view
     }
 
+    // TODO is this the right lifecycle method
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        numberPicker.minValue = 2
-        numberPicker.maxValue = 20
-
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        numberPicker.minValue = 2
+        numberPicker.maxValue = 20
+
+        btnCompleteSet.setOnClickListener {
+            Log.d("aaa","numPushups: ${viewModel.numPushups}")
+        }
+
+    }
 }
-
-
-//protected fun onCreate(savedInstanceState: Bundle) {
-//    super.onCreate(savedInstanceState)
-//    setContentView(R.layout.numberpicker)
-//
-//    val np = findViewById(R.id.numberPicker)
-//
-//    np.setMinValue(2)
-//    np.setMaxValue(20)
-//
-//    np.setOnValueChangedListener(onValueChangeListener)
-//}
-//
-//var onValueChangeListener: NumberPicker.OnValueChangeListener =
-//    NumberPicker.OnValueChangeListener { numberPicker, i, i1 ->
-//        Toast.makeText(
-//            this@MainActivity,
-//            "selected number " + numberPicker.value, Toast.LENGTH_SHORT
-//        )
-//    }

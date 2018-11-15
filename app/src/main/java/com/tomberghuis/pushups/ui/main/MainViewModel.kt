@@ -7,5 +7,7 @@ class MainViewModel : ViewModel() {
 
 
     // initialise this from database "last inserted pushupSet"
+
+    // didn't need to use livedata for some reason, not using room
     var numPushups = 5
 }
