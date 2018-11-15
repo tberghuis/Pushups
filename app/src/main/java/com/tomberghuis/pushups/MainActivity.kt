@@ -7,6 +7,7 @@ import com.tomberghuis.pushups.ui.main.MainFragment
 class MainActivity : AppCompatActivity() {
 
 
+    // do i need the database here???? no
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
