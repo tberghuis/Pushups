@@ -14,10 +14,17 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import com.tomberghuis.pushups.R.id.container
 import android.databinding.DataBindingUtil
 import android.util.Log
+import com.tomberghuis.pushups.data.AppDatabase
 import com.tomberghuis.pushups.databinding.MainFragmentBinding
 
 
 class MainFragment : Fragment() {
+
+    // should this code be here... no it should be in a repository
+//    private lateinit var database: AppDatabase
+//    private lateinit var taskDao: TaskDao
+    // TODO copy architecture from sunflower
+
 
     companion object {
         fun newInstance() = MainFragment()

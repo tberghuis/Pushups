@@ -14,8 +14,7 @@ import android.arch.persistence.room.RoomDatabase
 abstract class AppDatabase : RoomDatabase() {
 
 
-    // Singleton example from Google Samples -
-    // https://github.com/googlesamples/android-architecture-components/blob/master/BasicRxJavaSampleKotlin/app/src/main/java/com/example/android/observability/persistence/UsersDatabase.kt
+    abstract fun completedPushupSetDao(): CompletedPushupSetDao
 
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null
