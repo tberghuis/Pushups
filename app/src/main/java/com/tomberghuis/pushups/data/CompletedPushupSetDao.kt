@@ -9,8 +9,8 @@ import android.arch.persistence.room.Query
 interface CompletedPushupSetDao {
 
 
-    @Query("SELECT * FROM completed_pushup_sets order by id desc limit 1")
     // will this blend
+    @Query("SELECT * FROM completed_pushup_sets order by id desc limit 1")
     fun getLastPushupSet(): CompletedPushupSet
 
     @Insert
