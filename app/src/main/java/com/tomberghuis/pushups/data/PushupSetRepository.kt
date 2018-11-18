@@ -15,6 +15,8 @@ class PushupSetRepository private constructor(private val pushupSetDao: Complete
         }
     }
 
+    // TODO file bug
+    // the null safe operator does not seam to work when called in coroutine
     suspend fun getLastPushupSet() = withContext(IO) {
         pushupSetDao.getLastPushupSet()
     }
