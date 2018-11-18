@@ -2,7 +2,9 @@ package com.tomberghuis.pushups.viewmodels
 
 import android.arch.lifecycle.ViewModel
 import com.tomberghuis.pushups.data.PushupSetRepository
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -24,14 +26,14 @@ class MainViewModel(
 
         // TODO run room stuff on io thread
         // assign on UI thread
-        GlobalScope.launch {
-
+        GlobalScope.async(IO) {
+            pushupSetRepository.getLastPushupSet()?.numPushups.let {
+                numPushupsNumberPicker = it
+            }
         }
 
 
-        pushupSetRepository.getLastPushupSet().numPushups?.let {
-            numPushupsNumberPicker = it
-        }
+
     }
 
 
