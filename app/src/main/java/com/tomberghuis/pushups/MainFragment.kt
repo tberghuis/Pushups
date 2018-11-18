@@ -16,6 +16,7 @@ import android.databinding.DataBindingUtil
 import android.util.Log
 import com.tomberghuis.pushups.data.AppDatabase
 import com.tomberghuis.pushups.databinding.MainFragmentBinding
+import com.tomberghuis.pushups.utilities.InjectorUtils
 import com.tomberghuis.pushups.viewmodels.MainViewModel
 
 
@@ -31,7 +32,9 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
+//    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
+    
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +43,11 @@ class MainFragment : Fragment() {
         val binding : MainFragmentBinding = DataBindingUtil.inflate(
             inflater, R.layout.main_fragment, container, false
         )
+        val factory = InjectorUtils.provideMainViewModelFactory(requireContext())
+        viewModel = ViewModelProviders.of(this, factory)
+            .get(MainViewModel::class.java)
         binding.viewmodel = viewModel
-        val view = binding.getRoot()
-        return view
+        return binding.root
     }
 
     // TODO is this the right lifecycle method
@@ -57,8 +62,10 @@ class MainFragment : Fragment() {
         numberPicker.minValue = 2
         numberPicker.maxValue = 20
 
+        // this should be hooked up in the xml
         btnCompleteSet.setOnClickListener {
-            Log.d("aaa","numPushups: ${viewModel.numPushups}")
+            Log.d("aaa","numPushups: ${viewModel.numPushupsNumberPicker}")
+            viewModel.saveCompletedPushupSet()
         }
 
     }
