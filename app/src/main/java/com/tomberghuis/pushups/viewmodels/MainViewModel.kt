@@ -5,43 +5,29 @@ import com.tomberghuis.pushups.data.PushupSetRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val pushupSetRepository: PushupSetRepository
 ) : ViewModel() {
-    // TODO: Implement the ViewModel
-
-
-    // initialise this from database "last inserted pushupSet"
-
     // didn't need to use livedata for some reason, not using room
-//    var numPushups = 5
 
     // 2 way data binding number picker
     var numPushupsNumberPicker: Int = 5
 
     init {
-        // if not null
-
-        // TODO run room stuff on io thread
-        // assign on UI thread
         GlobalScope.async(IO) {
-            pushupSetRepository.getLastPushupSet()?.numPushups.let {
+            // what happens when run app for first time and db empty?
+            // basically thread is getting killed because getLastPushupSet returns null
+            // how does that work??? some sort of magic
+            pushupSetRepository.getLastPushupSet().numPushups.let {
+                // somehow the 2 way data binding is working even when assigning not on the UI thread
                 numPushupsNumberPicker = it
             }
         }
-
-
-
     }
-
 
     fun saveCompletedPushupSet(){
         pushupSetRepository.saveCompletedPushupSet(numPushupsNumberPicker)
     }
-
-
-
 
 }

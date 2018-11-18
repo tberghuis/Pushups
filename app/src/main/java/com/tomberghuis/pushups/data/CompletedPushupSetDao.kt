@@ -11,6 +11,7 @@ interface CompletedPushupSetDao {
 
     // will this blend
     @Query("SELECT * FROM completed_pushup_sets order by id desc limit 1")
+    //fun getLastPushupSet(): CompletedPushupSet?
     fun getLastPushupSet(): CompletedPushupSet
 
     @Insert
