@@ -1,5 +1,7 @@
 package com.tomberghuis.pushups.data
 
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 import kotlin.concurrent.thread
 
 class PushupSetRepository private constructor(private val pushupSetDao: CompletedPushupSetDao) {
@@ -13,7 +15,9 @@ class PushupSetRepository private constructor(private val pushupSetDao: Complete
         }
     }
 
-    fun getLastPushupSet() = pushupSetDao.getLastPushupSet()
+    suspend fun getLastPushupSet() = withContext(IO) {
+        pushupSetDao.getLastPushupSet()
+    }
 
     companion object {
 

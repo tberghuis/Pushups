@@ -1,5 +1,6 @@
 package com.tomberghuis.pushups
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -62,10 +63,21 @@ class MainFragment : Fragment() {
         numberPicker.minValue = 2
         numberPicker.maxValue = 20
 
+
+        viewModel.numPushupsNumberPicker.observe(this, Observer {
+            it?.let {
+                numberPicker.value = it
+            }
+        })
+
+
         // this should be hooked up in the xml
         btnCompleteSet.setOnClickListener {
             Log.d("aaa","numPushups: ${viewModel.numPushupsNumberPicker}")
             viewModel.saveCompletedPushupSet()
+
+            // TODO this is a test
+//            viewModel.numPushupsNumberPicker = 11
         }
 
     }
