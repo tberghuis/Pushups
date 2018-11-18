@@ -1,4 +1,4 @@
-package com.tomberghuis.pushups.ui.main
+package com.tomberghuis.pushups.viewmodels
 
 import android.arch.lifecycle.ViewModel
 

@@ -4,13 +4,13 @@
     <data>
         <variable
                 name="viewmodel"
-                type="com.tomberghuis.pushups.ui.main.MainViewModel"/>
+                type="com.tomberghuis.pushups.viewmodels.MainViewModel"/>
     </data>
     <android.support.constraint.ConstraintLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.main.MainFragment">
+            tools:context=".MainFragment">
 
         <NumberPicker
                 android:id="@+id/numberPicker"

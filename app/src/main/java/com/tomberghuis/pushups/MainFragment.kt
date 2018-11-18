@@ -1,4 +1,4 @@
-package com.tomberghuis.pushups.ui.main
+package com.tomberghuis.pushups
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -16,6 +16,7 @@ import android.databinding.DataBindingUtil
 import android.util.Log
 import com.tomberghuis.pushups.data.AppDatabase
 import com.tomberghuis.pushups.databinding.MainFragmentBinding
+import com.tomberghuis.pushups.viewmodels.MainViewModel
 
 
 class MainFragment : Fragment() {
